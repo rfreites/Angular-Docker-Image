@@ -1,16 +1,17 @@
-FROM node:8
+FROM alpine
 
 LABEL maintainer="Ronny Freites <ronnyangelo.freites@gmail.com>"
+
+RUN apk add --update nodejs nodejs-npm
 
 # ------------------------------------------
 # install the angular CLI
 # ------------------------------------------
-RUN npm install -g @angular/cli
+RUN npm install @angular/cli -g
 
-# ------------------------------------------
-# change the work directory
-# ------------------------------------------
-WORKDIR /var/www
+COPY . /src
+
+WORKDIR /src
 
 # ------------------------------------------
 # copy our initilization file and set permissions
